@@ -1,18 +1,20 @@
 'use client'
 
-// Inspired by react-hot-toast library
 import * as React from 'react'
-
-import type { ToastActionElement, ToastProps } from '@/components/ui/toast'
+import { toast as sonnerToast } from 'sonner'
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
 
-type ToasterToast = ToastProps & {
+type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info' | 'loading'
+
+type ToasterToast = {
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
-  action?: ToastActionElement
+  variant?: ToastVariant
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
 const actionTypes = {
@@ -90,8 +92,6 @@ export const reducer = (state: State, action: Action): State => {
     case 'DISMISS_TOAST': {
       const { toastId } = action
 
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
       if (toastId) {
         addToRemoveQueue(toastId)
       } else {
@@ -142,12 +142,44 @@ type Toast = Omit<ToasterToast, 'id'>
 function toast({ ...props }: Toast) {
   const id = genId()
 
+  const dismiss = () => {
+    dispatch({ type: 'DISMISS_TOAST', toastId: id })
+    sonnerToast.dismiss(id)
+  }
+
   const update = (props: ToasterToast) =>
     dispatch({
       type: 'UPDATE_TOAST',
       toast: { ...props, id },
     })
-  const dismiss = () => dispatch({ type: 'DISMISS_TOAST', toastId: id })
+
+  const message = props.title as string
+  const options = {
+    id,
+    description: props.description,
+    onDismiss: dismiss,
+    onAutoClose: dismiss,
+  }
+
+  switch (props.variant) {
+    case 'success':
+      sonnerToast.success(message, options)
+      break
+    case 'error':
+      sonnerToast.error(message, options)
+      break
+    case 'warning':
+      sonnerToast.warning(message, options)
+      break
+    case 'info':
+      sonnerToast.info(message, options)
+      break
+    case 'loading':
+      sonnerToast.loading(message, options)
+      break
+    default:
+      sonnerToast(message, options)
+  }
 
   dispatch({
     type: 'ADD_TOAST',
@@ -184,7 +216,10 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }),
+    dismiss: (toastId?: string) => {
+      dispatch({ type: 'DISMISS_TOAST', toastId })
+      sonnerToast.dismiss(toastId)
+    },
   }
 }
 
