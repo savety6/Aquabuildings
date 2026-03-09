@@ -1,19 +1,19 @@
-import { Navbar } from "~/components/navbar"
-import { Hero } from "~/components/hero"
-import { Offers } from "~/components/offers"
-import { CTA } from "~/components/cta"
-import { Gallery } from "~/components/gallery"
-import { Footer } from "~/components/footer"
+import { BenefitsSection } from "~/components/benefits-section";
+import { CTA } from "~/components/cta";
+import { Gallery } from "~/components/gallery";
+import { Hero } from "~/components/hero";
+import { Offers } from "~/components/offers";
+import { ProcessSteps } from "~/components/process-steps";
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
       <Offers />
+      <BenefitsSection />
+      <ProcessSteps />
       <Gallery />
       <CTA />
-      <Footer />
     </main>
-  )
+  );
 }

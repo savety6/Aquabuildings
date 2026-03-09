@@ -1,97 +1,62 @@
-import Image from "next/image"
-import { Button } from "~/components/ui/button"
-import { Card, CardContent } from "~/components/ui/card"
-import { ArrowRight, Droplets, CalendarDays, Cpu } from "lucide-react"
-import { Offers as OffersTexts } from "~/consts/texts"
+import Link from "next/link";
+import { ArrowRight, Droplets, PencilRuler, ShieldCheck, Trees } from "lucide-react";
+import { homePage } from "~/consts/texts";
+import { SectionHeading } from "~/components/section-heading";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent } from "~/components/ui/card";
 
-const offers = [
-  {
-    icon: Droplets,
-    title: OffersTexts.offers.automatedWatering.title,
-    description:
-      OffersTexts.offers.automatedWatering.description,
-    image: "/images/smart-watering.jpg",
-    features: OffersTexts.offers.automatedWatering.features,
-  },
-  {
-    icon: CalendarDays,
-    title: OffersTexts.offers.gardenSubscriptions.title,
-    description:
-      OffersTexts.offers.gardenSubscriptions.description,
-    image: "/images/garden-subscription.jpg",
-    features: OffersTexts.offers.gardenSubscriptions.features,
-  },
-  {
-    icon: Cpu,
-    title: OffersTexts.offers.smartGardenFeatures.title,
-    description:
-      OffersTexts.offers.smartGardenFeatures.description,
-    image: "/images/garden-features.jpg",
-    features: OffersTexts.offers.smartGardenFeatures.features,
-  },
-]
+const icons = [Droplets, Trees, PencilRuler, ShieldCheck];
 
 export function Offers() {
   return (
-    <section id="offers" className="py-24 lg:py-32 bg-background">
+    <section id="services" className="bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent mb-3">
-            {OffersTexts.heading}
-          </p>
-          <h2 className="text-3xl font-serif font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance">
-            {OffersTexts.title}
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-            {OffersTexts.description}
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow={homePage.services.eyebrow}
+          title={homePage.services.title}
+          description={homePage.services.description}
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {offers.map((offer) => (
+        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
+          {homePage.services.items.map((offer, index) => {
+            const Icon = icons[index] ?? Droplets;
+
+            return (
             <Card
               key={offer.title}
-              className="group overflow-hidden border-border bg-card hover:shadow-lg transition-all duration-300 py-0"
+              className="group border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
-              <div className="relative h-56 overflow-hidden">
-                <Image
-                  src={offer.image}
-                  alt={offer.title}
-                  fill
-                  className="object-cover group -hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-foreground/10 group-hover:bg-foreground/5 transition-colors duration-300" />
-                <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                  <offer.icon className="h-5 w-5" />
-                </div>
-              </div>
-
               <CardContent className="p-6">
-                <h3 className="text-xl font-serif font-semibold text-card-foreground mb-2">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="mb-2 mt-5 text-xl font-serif font-semibold text-card-foreground">
                   {offer.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
                   {offer.description}
                 </p>
 
-                <ul className="flex flex-col gap-2 mb-6">
+                <ul className="mb-6 flex flex-col gap-2">
                   {offer.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm text-card-foreground">
+                    <li key={feature} className="flex items-start gap-2 text-sm text-card-foreground">
                       <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
                       {feature}
                     </li>
                   ))}
                 </ul>
 
-                <Button variant="ghost" className="text-primary hover:text-primary/90 hover:bg-primary/10 p-0 h-auto font-medium">
-                  {OffersTexts.button.label}
-                  <ArrowRight className="ml-1 h-4 w-4" />
+                <Button asChild variant="ghost" className="h-auto p-0 font-medium text-primary hover:bg-primary/10 hover:text-primary/90">
+                  <Link href={offer.href}>
+                    Научете повече
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
-          ))}
+          )})}
         </div>
       </div>
     </section>
-  )
+  );
 }

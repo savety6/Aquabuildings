@@ -1,49 +1,47 @@
-import { Button } from "~/components/ui/button"
-import { ArrowRight, Sparkles } from "lucide-react"
-import { CTA as CTATexts } from "~/consts/texts"
+import Link from "next/link";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import { homePage } from "~/consts/texts";
 
 export function CTA() {
   return (
-    <section id="cta" className="py-24 lg:py-32 bg-primary">
+    <section id="cta" className="bg-primary py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center mb-6">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-foreground/15 border border-primary-foreground/20 px-4 py-1.5 text-xs font-medium text-primary-foreground">
               <Sparkles className="h-3.5 w-3.5" />
-              {CTATexts.heading}
+              {homePage.cta.eyebrow}
             </span>
           </div>
 
           <h2 className="text-3xl font-serif font-bold tracking-tight text-primary-foreground sm:text-4xl lg:text-5xl text-balance">
-            {CTATexts.title}
+            {homePage.cta.title}
           </h2>
 
           <p className="mt-6 text-lg leading-relaxed text-primary-foreground/80">
-            {CTATexts.description}
+            {homePage.cta.description}
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-card text-card-foreground hover:bg-card/90 text-base px-8 py-6 font-medium"
-            >
-              {CTATexts.button1.label}
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button asChild size="lg" className="bg-card px-8 py-6 text-base font-medium text-card-foreground hover:bg-card/90">
+              <Link href={homePage.cta.primaryCta.href}>
+                {homePage.cta.primaryCta.label}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground/30 text-primary-foreground bg-primary-foreground/10 hover:bg-primary-foreground/20 hover:text-primary-foreground text-base px-8 py-6"
-            >
-              {CTATexts.button2.label}
+            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-primary-foreground/10 px-8 py-6 text-base text-primary-foreground hover:bg-primary-foreground/20 hover:text-primary-foreground">
+              <Link href={homePage.cta.secondaryCta.href}>
+                {homePage.cta.secondaryCta.label}
+              </Link>
             </Button>
           </div>
 
           <p className="mt-6 text-sm text-primary-foreground/60">
-            {CTATexts.subdescription}
+            {homePage.cta.footnote}
           </p>
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X, Droplets } from "lucide-react"
 import { Button } from "~/components/ui/button"
-import { NavbarOptions, Title } from "~/consts/texts"
+import { Title, mainNavigation, phoneNumber, phoneHref } from "~/consts/texts"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -20,17 +20,17 @@ export function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link href={NavbarOptions.offers.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            {NavbarOptions.offers.label}
-          </Link>
-          <Link href={NavbarOptions.gallery.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            {NavbarOptions.gallery.label}
-          </Link>
-          <Link href={NavbarOptions.contact.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            {NavbarOptions.contact.label}
-          </Link>
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-            {NavbarOptions.contactButton.label}
+          {mainNavigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Link href={phoneHref}>{phoneNumber}</Link>
           </Button>
         </div>
 
@@ -46,29 +46,20 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-background border-b border-border">
           <div className="flex flex-col gap-4 px-6 py-6">
-            <Link
-              href={NavbarOptions.offers.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {NavbarOptions.offers.label}
-            </Link>
-            <Link
-              href={NavbarOptions.gallery.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {NavbarOptions.gallery.label}
-            </Link>
-            <Link
-              href={NavbarOptions.contact.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {NavbarOptions.contact.label}
-            </Link>
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 w-fit">
-              {NavbarOptions.contactButton.label}
+            {mainNavigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Button asChild size="sm" className="w-fit bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link href={phoneHref} onClick={() => setIsOpen(false)}>
+                {phoneNumber}
+              </Link>
             </Button>
           </div>
         </div>

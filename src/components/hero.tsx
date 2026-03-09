@@ -1,69 +1,53 @@
-import Image from "next/image"
-import { Button } from "~/components/ui/button"
-import { ArrowRight, Leaf } from "lucide-react"
-import { Hero as HeroTexts } from "~/consts/texts"
+import Link from "next/link";
+import { ArrowRight, Leaf } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import { homePage } from "~/consts/texts";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/hero-garden.jpg"
-          alt="Lush automated garden with smart irrigation"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-foreground/60" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 lg:py-40">
+    <section className="relative overflow-hidden bg-foreground pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(75,165,117,0.45),_transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(76,125,255,0.22),_transparent_35%)]" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
-          <div className="flex items-center gap-2 mb-6">
+          <div className="mb-6 flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 px-4 py-1.5 text-xs font-medium text-card">
               <Leaf className="h-3.5 w-3.5" />
-              {HeroTexts.heading}
+              {homePage.hero.eyebrow}
             </span>
           </div>
 
           <h1 className="text-4xl font-serif font-bold tracking-tight text-card sm:text-5xl lg:text-7xl text-balance leading-tight">
-            {HeroTexts.title}
+            {homePage.hero.title}
           </h1>
 
           <p className="mt-6 text-lg leading-relaxed text-card/80 max-w-xl">
-            {HeroTexts.description}
+            {homePage.hero.description}
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6">
-              {HeroTexts.button1.label}
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6">
+              <Link href={homePage.hero.primaryCta.href}>
+                {homePage.hero.primaryCta.label}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-card/30 text-card bg-card/10 hover:bg-card/20 hover:text-card backdrop-blur-sm text-base px-8 py-6"
-            >
-              {HeroTexts.button2.label}
+            <Button asChild size="lg" variant="outline" className="border-card/30 text-card bg-card/10 hover:bg-card/20 hover:text-card backdrop-blur-sm text-base px-8 py-6">
+              <Link href={homePage.hero.secondaryCta.href}>
+                {homePage.hero.secondaryCta.label}
+              </Link>
             </Button>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-8 max-w-md">
-            <div>
-              <p className="text-3xl font-serif font-bold text-card">{HeroTexts.stats.gardensAutomated.value}</p>
-              <p className="text-sm text-card/60 mt-1">{HeroTexts.stats.gardensAutomated.label}</p>
-            </div>
-            <div>
-              <p className="text-3xl font-serif font-bold text-card">{HeroTexts.stats.waterSaved.value}</p>
-              <p className="text-sm text-card/60 mt-1">{HeroTexts.stats.waterSaved.label}</p>
-            </div>
-            <div>
-              <p className="text-3xl font-serif font-bold text-card">{HeroTexts.stats.smartMonitoring.value}</p>
-              <p className="text-sm text-card/60 mt-1">{HeroTexts.stats.smartMonitoring.label}</p>
-            </div>
+          <div className="mt-16 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+            {homePage.hero.stats.map((stat) => (
+              <div key={stat.label} className="rounded-2xl border border-card/10 bg-card/10 p-5 backdrop-blur-sm">
+                <p className="text-3xl font-serif font-bold text-card">{stat.value}</p>
+                <p className="mt-1 text-sm text-card/70">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
