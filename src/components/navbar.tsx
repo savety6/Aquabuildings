@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X, Droplets } from "lucide-react"
 import { Button } from "~/components/ui/button"
+import { NavbarOptions, Title } from "~/consts/texts"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,22 +15,22 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2">
           <Droplets className="h-7 w-7 text-primary" />
           <span className="text-xl font-serif font-bold text-foreground tracking-tight">
-            GreenFlow
+            {Title}
           </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link href="#offers" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Our Offers
+          <Link href={NavbarOptions.offers.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            {NavbarOptions.offers.label}
           </Link>
-          <Link href="#gallery" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Gallery
+          <Link href={NavbarOptions.gallery.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            {NavbarOptions.gallery.label}
           </Link>
-          <Link href="#cta" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Contact
+          <Link href={NavbarOptions.contact.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            {NavbarOptions.contact.label}
           </Link>
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Get Started
+            {NavbarOptions.contactButton.label}
           </Button>
         </div>
 
@@ -46,28 +47,28 @@ export function Navbar() {
         <div className="md:hidden bg-background border-b border-border">
           <div className="flex flex-col gap-4 px-6 py-6">
             <Link
-              href="#offers"
+              href={NavbarOptions.offers.href}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Our Offers
+              {NavbarOptions.offers.label}
             </Link>
             <Link
-              href="#gallery"
+              href={NavbarOptions.gallery.href}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Gallery
+              {NavbarOptions.gallery.label}
             </Link>
             <Link
-              href="#cta"
+              href={NavbarOptions.contact.href}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Contact
+              {NavbarOptions.contact.label}
             </Link>
             <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 w-fit">
-              Get Started
+              {NavbarOptions.contactButton.label}
             </Button>
           </div>
         </div>

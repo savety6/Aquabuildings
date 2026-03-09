@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
+import { Title } from "~/consts/texts";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -15,7 +16,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: 'GreenFlow | Smart Garden Automation',
+  title: `${Title} | Smart Garden Automation`,
   description: 'Automated watering systems, gardening subscriptions, and smart garden features. Let technology nurture your garden.',
   generator: 'v0.app',
   icons: {

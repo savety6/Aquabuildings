@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Droplets } from "lucide-react"
+import { AllRightsReserved, Title, Footer as FooterTexts } from "~/consts/texts";
 
 export function Footer() {
   return (
@@ -10,48 +11,48 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Droplets className="h-6 w-6 text-primary" />
               <span className="text-lg font-serif font-bold text-background tracking-tight">
-                GreenFlow
+                {Title}
               </span>
             </Link>
             <p className="text-sm text-background/60 leading-relaxed">
-              Smart garden automation for modern homeowners. Let technology nurture your garden.
+              {FooterTexts.description}
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-background mb-4 uppercase tracking-wider">Products</h4>
+            <h4 className="text-sm font-semibold text-background mb-4 uppercase tracking-wider">{FooterTexts.column1.title}</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Watering Systems</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Subscriptions</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Smart Sensors</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Garden App</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column1.items[0]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column1.items[1]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column1.items[2]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column1.items[3]?.label}</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-background mb-4 uppercase tracking-wider">Company</h4>
+            <h4 className="text-sm font-semibold text-background mb-4 uppercase tracking-wider">{FooterTexts.column2.title}</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">About Us</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Blog</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Careers</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Contact</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column2.items[0]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column2.items[1]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column2.items[2]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column2.items[3]?.label}</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-background mb-4 uppercase tracking-wider">Support</h4>
+            <h4 className="text-sm font-semibold text-background mb-4 uppercase tracking-wider">{FooterTexts.column3.title}</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Help Center</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Installation Guide</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">Terms of Service</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column3.items[0]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column3.items[1]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column3.items[2]?.label}</Link></li>
+              <li><Link href="#" className="text-sm text-background/60 hover:text-background transition-colors">{FooterTexts.column3.items[3]?.label}</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-background/10">
           <p className="text-sm text-background/40 text-center">
-            {'© 2026 GreenFlow. All rights reserved.'}
+            {AllRightsReserved}
           </p>
         </div>
       </div>

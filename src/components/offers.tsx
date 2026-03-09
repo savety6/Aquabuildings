@@ -2,31 +2,32 @@ import Image from "next/image"
 import { Button } from "~/components/ui/button"
 import { Card, CardContent } from "~/components/ui/card"
 import { ArrowRight, Droplets, CalendarDays, Cpu } from "lucide-react"
+import { Offers as OffersTexts } from "~/consts/texts"
 
 const offers = [
   {
     icon: Droplets,
-    title: "Automated Watering",
+    title: OffersTexts.offers.automatedWatering.title,
     description:
-      "Smart irrigation systems that adapt to weather conditions, soil moisture, and plant needs. Save water while keeping your garden lush and healthy.",
+      OffersTexts.offers.automatedWatering.description,
     image: "/images/smart-watering.jpg",
-    features: ["Weather-adaptive scheduling", "Soil moisture sensors", "Zone-based control"],
+    features: OffersTexts.offers.automatedWatering.features,
   },
   {
     icon: CalendarDays,
-    title: "Garden Subscriptions",
+    title: OffersTexts.offers.gardenSubscriptions.title,
     description:
-      "Monthly curated boxes with seasonal plants, premium seeds, organic fertilizers, and expert growing guides delivered to your doorstep.",
+      OffersTexts.offers.gardenSubscriptions.description,
     image: "/images/garden-subscription.jpg",
-    features: ["Seasonal plant selections", "Organic supplies included", "Expert growing guides"],
+    features: OffersTexts.offers.gardenSubscriptions.features,
   },
   {
     icon: Cpu,
-    title: "Smart Garden Features",
+    title: OffersTexts.offers.smartGardenFeatures.title,
     description:
-      "From soil sensors to growth tracking, our smart features let you monitor and manage your garden from anywhere using our intuitive app.",
+      OffersTexts.offers.smartGardenFeatures.description,
     image: "/images/garden-features.jpg",
-    features: ["Real-time monitoring", "Growth analytics", "Remote app control"],
+    features: OffersTexts.offers.smartGardenFeatures.features,
   },
 ]
 
@@ -36,13 +37,13 @@ export function Offers() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-sm font-medium uppercase tracking-widest text-accent mb-3">
-            What We Offer
+            {OffersTexts.heading}
           </p>
           <h2 className="text-3xl font-serif font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance">
-            Everything Your Garden Needs
+            {OffersTexts.title}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-            From automated irrigation to curated subscriptions, we provide complete smart gardening solutions.
+            {OffersTexts.description}
           </p>
         </div>
 
@@ -57,7 +58,7 @@ export function Offers() {
                   src={offer.image}
                   alt={offer.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group -hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-foreground/10 group-hover:bg-foreground/5 transition-colors duration-300" />
                 <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -83,7 +84,7 @@ export function Offers() {
                 </ul>
 
                 <Button variant="ghost" className="text-primary hover:text-primary/90 hover:bg-primary/10 p-0 h-auto font-medium">
-                  Learn More
+                  {OffersTexts.button.label}
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               </CardContent>

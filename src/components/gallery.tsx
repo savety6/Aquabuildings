@@ -3,37 +3,37 @@
 import { useState } from "react"
 import Image from "next/image"
 import { X } from "lucide-react"
-
+import { Gallery as GalleryTexts } from "~/consts/texts"
 const galleryItems = [
   {
     src: "/images/gallery-1.jpg",
-    alt: "Modern backyard garden with automated sprinklers",
-    label: "Backyard Oasis",
+    alt: GalleryTexts.galleryItems.backyardOasis.alt,
+    label: GalleryTexts.galleryItems.backyardOasis.label,
   },
   {
     src: "/images/gallery-2.jpg",
-    alt: "Raised garden beds with drip irrigation",
-    label: "Vegetable Garden",
+    alt: GalleryTexts.galleryItems.vegetableGarden.alt,
+    label: GalleryTexts.galleryItems.vegetableGarden.label,
   },
   {
     src: "/images/gallery-3.jpg",
-    alt: "Rooftop garden terrace with smart watering",
-    label: "Rooftop Terrace",
+    alt: GalleryTexts.galleryItems.rooftopTerrace.alt,
+    label: GalleryTexts.galleryItems.rooftopTerrace.label,
   },
   {
     src: "/images/gallery-4.jpg",
-    alt: "Water droplets on green leaves from automated misting",
-    label: "Smart Misting",
+    alt: GalleryTexts.galleryItems.smartMisting.alt,
+    label: GalleryTexts.galleryItems.smartMisting.label,
   },
   {
     src: "/images/gallery-5.jpg",
-    alt: "Indoor greenhouse with automated hydroponics",
-    label: "Indoor Greenhouse",
+    alt: GalleryTexts.galleryItems.indoorGreenhouse.alt,
+    label: GalleryTexts.galleryItems.indoorGreenhouse.label,
   },
   {
     src: "/images/gallery-6.jpg",
-    alt: "Luxury landscaped garden with water features",
-    label: "Landscape Design",
+    alt: GalleryTexts.galleryItems.landscapeDesign.alt,
+    label: GalleryTexts.galleryItems.landscapeDesign.label,
   },
 ]
 
@@ -45,13 +45,13 @@ export function Gallery() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-sm font-medium uppercase tracking-widest text-accent mb-3">
-            Our Work
+            {GalleryTexts.heading}
           </p>
           <h2 className="text-3xl font-serif font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance">
-            Gardens We Have Brought to Life
+            {GalleryTexts.title}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-            Explore our portfolio of beautifully automated gardens, from intimate urban terraces to sprawling backyard landscapes.
+            {GalleryTexts.description}
           </p>
         </div>
 
