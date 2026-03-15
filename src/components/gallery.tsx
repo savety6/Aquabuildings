@@ -1,11 +1,67 @@
-import { Flower2, House, Sprout, Trees, Warehouse, Waves } from "lucide-react";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import { ImageOff } from "lucide-react";
 import { homePage } from "~/consts/texts";
 import { SectionHeading } from "~/components/section-heading";
 import { ScrollReveal } from "~/components/scroll-reveal";
+import { GalleryGrid, type GalleryItem } from "./gallery-grid";
 
-const icons = [Sprout, Flower2, Trees, Waves, Warehouse, House];
+const supportedExtensions = new Set([
+  ".avif",
+  ".gif",
+  ".jpeg",
+  ".jpg",
+  ".png",
+  ".webp",
+]);
 
-export function Gallery() {
+async function readGalleryDirectory(directoryName: string): Promise<GalleryItem[]> {
+  const galleryDirectory = path.join(process.cwd(), "public", directoryName);
+  const entries = await fs.readdir(galleryDirectory, { withFileTypes: true });
+
+  const imageFiles = entries
+    .filter(
+      (entry) =>
+        entry.isFile() &&
+        supportedExtensions.has(path.extname(entry.name).toLowerCase()),
+    )
+    .sort((left, right) =>
+      left.name.localeCompare(right.name, undefined, { numeric: true }),
+    );
+
+  return imageFiles.map((file, index) => {
+    const content =
+      homePage.gallery.items.at(index % homePage.gallery.items.length) ??
+      homePage.gallery.items[0];
+
+    return {
+      src: `/${directoryName}/${file.name}`,
+      alt: content.alt,
+      title: content.title,
+      description: content.description,
+    };
+  });
+}
+
+async function getGalleryItems(): Promise<GalleryItem[]> {
+  for (const directoryName of ["images", "image"]) {
+    try {
+      const items = await readGalleryDirectory(directoryName);
+
+      if (items.length > 0) {
+        return items;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return [];
+}
+
+export async function Gallery() {
+  const galleryItems = await getGalleryItems();
+
   return (
     <section id="gallery" className="bg-secondary py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -17,27 +73,44 @@ export function Gallery() {
           />
         </ScrollReveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {homePage.gallery.items.map((item, index) => {
-            const Icon = icons[index] ?? Sprout;
-
-            return (
-              <ScrollReveal key={item.title} delay={index * 0.1}>
-                <div className="rounded-2xl border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.85),rgba(240,247,242,0.95))] p-6 shadow-sm h-full">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
+        {galleryItems.length > 0 ? (
+          <GalleryGrid items={galleryItems} />
+        ) : (
+          <ScrollReveal delay={0.15}>
+            <div className="border-border/70 bg-background/80 mt-16 rounded-[2rem] border p-8 shadow-sm backdrop-blur-sm sm:p-10">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div className="max-w-2xl">
+                  <div className="bg-primary/10 text-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium">
+                    <ImageOff className="h-4 w-4" />
+                    {homePage.gallery.emptyStateLabel}
                   </div>
-                  <h3 className="mt-5 text-xl font-serif font-semibold text-foreground">
-                    {item.title}
+                  <h3 className="text-foreground mt-5 font-serif text-2xl font-semibold">
+                    {homePage.gallery.emptyStateTitle}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {item.description}
+                  <p className="text-muted-foreground mt-3 text-base leading-relaxed">
+                    {homePage.gallery.emptyStateDescription}
                   </p>
                 </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
+
+                <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 lg:max-w-xl">
+                  {homePage.gallery.items.slice(0, 4).map((item) => (
+                    <div
+                      key={item.title}
+                      className="border-border/60 bg-secondary/70 rounded-2xl border p-5"
+                    >
+                      <p className="text-foreground font-serif text-lg font-semibold">
+                        {item.title}
+                      </p>
+                      <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );
