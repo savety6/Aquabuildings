@@ -9,6 +9,7 @@
     "dev": "next dev --turbo",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "hero:video": "sh -c 'INPUT=\"${1:-public/GeneratedVideo2026-3_07PM.mp4}\"; BASENAME=\"${2:-public/hero-garden}\"; ffmpeg -y -i \"$INPUT\" -c:v libvpx-vp9 -b:v 0 -crf 41 -an \"$BASENAME.webm\" && ffmpeg -y -i \"$INPUT\" -vf \"select=eq(n\\\\,0)\" -frames:v 1 -update 1 \"$BASENAME-poster.jpg\"' --",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",

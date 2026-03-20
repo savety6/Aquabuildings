@@ -20,7 +20,7 @@ export function Hero() {
         >
           <source src="/hero-garden.webm" type="video/webm" />
           <source
-            src="/mixkit-sprinkler-watering-the-grass-19551-hd-ready.mp4"
+            src="/GeneratedVideo2026-3_07PM.mp4"
             type="video/mp4"
           />
         </video>
