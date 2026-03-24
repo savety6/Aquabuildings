@@ -80,7 +80,7 @@ export function Hero() {
           <div className="mt-16 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
             {homePage.hero.stats.map((stat, index) => (
               <ScrollReveal key={stat.label} delay={0.4 + index * 0.1}>
-                <div className="border-card/15 bg-card/12 rounded-3xl border p-5 shadow-[0_20px_50px_rgba(0,0,0,0.22)] backdrop-blur-md">
+                <div className="border-card/15 bg-card/12 rounded-3xl border p-5 shadow-[0_20px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-card/16 hover:shadow-[0_28px_70px_rgba(0,0,0,0.28)]">
                   <p className="text-card font-serif text-3xl font-bold">
                     {stat.value}
                   </p>

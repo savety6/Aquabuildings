@@ -41,7 +41,7 @@ export function GalleryGrid({ items }: GalleryGridProps) {
             <button
               type="button"
               onClick={() => setSelectedImage(index)}
-              className="group bg-foreground/5 focus-visible:ring-primary relative h-full w-full overflow-hidden rounded-[1.75rem] text-left focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="group bg-foreground/5 focus-visible:ring-primary relative h-full w-full overflow-hidden rounded-[1.75rem] text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               aria-label={`Отвори снимка: ${item.title}`}
             >
               <Image

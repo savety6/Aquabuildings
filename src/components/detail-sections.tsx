@@ -20,7 +20,7 @@ export function DetailSections({ sections }: DetailSectionsProps) {
         {sections.map((section, index) => (
           <ScrollReveal key={section.title} delay={index * 0.1}>
             <motion.article
-              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow duration-300 lg:p-8"
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl lg:p-8"
               whileHover={{ y: -6, scale: 1.01 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >

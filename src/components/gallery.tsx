@@ -77,7 +77,7 @@ export async function Gallery() {
           <GalleryGrid items={galleryItems} />
         ) : (
           <ScrollReveal delay={0.15}>
-            <div className="border-border/70 bg-background/80 mt-16 rounded-[2rem] border p-8 shadow-sm backdrop-blur-sm sm:p-10">
+            <div className="border-border/70 bg-background/80 mt-16 rounded-[2rem] border p-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-10">
               <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                 <div className="max-w-2xl">
                   <div className="bg-primary/10 text-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium">
@@ -96,7 +96,7 @@ export async function Gallery() {
                   {homePage.gallery.items.slice(0, 4).map((item) => (
                     <div
                       key={item.title}
-                      className="border-border/60 bg-secondary/70 rounded-2xl border p-5"
+                      className="border-border/60 bg-secondary/70 rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                     >
                       <p className="text-foreground font-serif text-lg font-semibold">
                         {item.title}
